@@ -1,3 +1,5 @@
+//Random Function module
+
 var getRandomInt = function( from, end ) {
   return parseInt( Math.random() * ( end - from ) + from );
 }
