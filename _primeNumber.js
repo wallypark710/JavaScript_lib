@@ -4,22 +4,24 @@ var isPrime = function( num ) {
 	    return false;
 	}
     }
-
     return true;
 }
 
 
-
-var primeNumber = function( num ) {
+var primeNumber = function( num ) { 
     var primeArray = [];
-    var temp = paresInt( Math.sqrt(num) );
+    var cnt = num;
+    var param = 1;
 
-    for(var i=0; i <= temp; i++) {
-	if( isPrime(i) ) {
-	    
 
+    while( cnt >= 0 ) {
+	if( isPrime( param ) ) {
+	    primeArray.push( param );
+	    cnt -= 1;
 	}
-
-    } 
+	
+	param += 1;	
+    }
+    return primeArray.pop();
 }
-
+	    
