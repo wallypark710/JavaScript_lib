@@ -182,3 +182,157 @@ _.contains = function(collection, target) {
 
     return false;
 };
+
+
+
+_.every = function(collection, iterator) {
+
+    if( Array.isArray(collection) ){
+      for( var i = 0; i < collection.length; i++ ){
+        if( iterator === undefined ){
+          if( !collection[i] ){
+            return false;
+          }
+        } else {
+          if(!iterator(collection[i])){
+            return false;
+          }
+        }
+      }
+    } else {
+      for( var key in collection ){
+        if( iterator === undefined ){
+          if( !collection[key] ){
+            return false;
+          }
+        } else {
+          if( !iterator(collection[key]) ){
+            return false;
+          }
+        }
+      }
+    }
+
+    return true;
+   
+};
+
+
+
+_.some = function(collection, iterator) {
+    if( Array.isArray(collection) ){
+      for( var i = 0; i < collection.length; i++ ){
+        if( iterator === undefined ){
+          if( collection[i] ){
+            return true;
+          }
+        } else {
+          if(iterator(collection[i])){
+            return true;
+          }
+        }
+      }
+    } else {
+      for( var key in collection ){
+        if( iterator === undefined ){
+          if( collection[key] ){
+            return true;
+          }
+        } else {
+          if( iterator(collection[key]) ){
+            return true;
+          }
+        }
+      }
+    }
+
+    return false;
+    
+};
+
+
+
+_.extend = function(obj) {
+
+    var argArr = Object.values(arguments);
+
+    for( var i = 1; i < argArr.length; i++){
+
+      for( var key in argArr[i] ){
+        obj[key] = argArr[i][key];
+      }
+
+    }
+
+    return obj;
+
+};
+
+
+
+_.defaults = function(obj) {
+    var argArr = Object.values(arguments);
+
+    for( var i = 1; i < argArr.length ; i++ ){
+
+      for( var key in argArr[i] ){
+        if( obj[key] === undefined ){
+          obj[key] = argArr[i][key];
+        }
+      }
+
+    }
+    
+    return obj;
+
+};
+
+
+
+_.memoize = function(func) {
+    var cache = {};
+
+    return function(){
+      var arg = Object.values(arguments);
+      var key = JSON.stringify(arg);
+
+      if( ! (key in cache) ){
+        cache[key] = func.apply(this, arg);
+      }
+
+      return cache[key];
+    }
+};
+
+
+
+_.delay = function(func, wait) {
+
+    var arg = Object.values(arguments).slice(2);
+
+    setTimeout(function(){
+      func.apply(this, arg);
+    },wait);
+};
+
+
+
+_.shuffle = function(array) {
+    var arr = array.slice();
+
+    var idx1;
+    var idx2;
+    var temp;
+
+    for( var i = 0; i < 100 ; i++ ){
+      idx1 = parseInt(Math.random()*arr.length);
+      idx2 = parseInt(Math.random()*arr.length);
+
+      temp = arr[idx1];
+      arr[idx1] = arr[idx2];
+      arr[idx2] = temp;
+    }
+
+    return arr;
+ 
+};
