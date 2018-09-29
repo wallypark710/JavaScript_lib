@@ -336,3 +336,23 @@ _.shuffle = function(array) {
     return arr;
  
 };
+
+
+
+_.invoke = function(collection, functionOrKey, args) {
+
+    var result = [];
+
+    if( typeof functionOrKey === 'string' ){
+      for( var i = 0; i < collection.length; i++ ){
+        result.push( collection[i][functionOrKey].apply(collection[i]) );
+      }
+    } else {
+      for( var i = 0; i < collection.length; i++ ){
+        result.push( functionOrKey.apply(collection[i]) );
+      }
+    }
+    
+    return result;
+
+};
