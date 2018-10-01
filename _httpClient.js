@@ -1,7 +1,7 @@
 var http = require('http');
 
 var options = {
-	host: 'infinite-brushlands-94340.herokuapp.com',
+	host: '127.0.0.1',
 	path: '/',
 	port: '3000',
 	method: 'POST'
