@@ -19,4 +19,5 @@ var randomString = function(length) {
 var typeArr = new Uint32Array(1);
 window.crypto.getRandomValues(typeArr);
 
-console.log(typeArr[0]); // 0 ~ 2^32 사이의 난수 생성.
+// 0 ~ 2^32 사이의 난수 생성.
+console.log(typeArr[0]);
