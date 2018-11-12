@@ -17,11 +17,11 @@ _.last = function(array, n){
 _.each = function(collection, iterator){
 
     if( Array.isArray(collection) ){
-      for( var i = 0; i < collection.length; i++ ){
+      for( let i = 0; i < collection.length; i++ ){
         iterator(collection[i], i, collection);
       }
     } else {
-      for( var key in collection ){
+      for( let key in collection ){
         iterator(collection[key], key, collection);
       }
     } 
@@ -31,7 +31,7 @@ _.each = function(collection, iterator){
 
 _.indexOf = function(array, target){
 
-    for( var i = 0 ; i < array.length; i++ ){
+    for( let i = 0 ; i < array.length; i++ ){
       if( array[i] === target ){
         return i;
       }
@@ -43,15 +43,15 @@ _.indexOf = function(array, target){
 
 
 _.filter = function(collection, test) {
-    var result = [];
+    let result = [];
     if( Array.isArray(collection) ){
-      for( var i = 0; i < collection.length; i++ ){
+      for( let i = 0; i < collection.length; i++ ){
         if( test(collection[i]) ){
           result.push(collection[i]);
         }
       }
     } else {
-      for( var key in collection ){
+      for( let key in collection ){
         if( test(collection[key]) ){
           result.push(collection[key]);
         }
@@ -65,16 +65,16 @@ _.filter = function(collection, test) {
 
 
 _.reject = function(collection, test) {
-    var result = [];
+    let result = [];
 
     if( Array.isArray(collection) ){
-      for( var i = 0; i < collection.length; i++ ){
+      for( let i = 0; i < collection.length; i++ ){
         if( !test(collection[i]) ){
           result.push(collection[i]);
         }
       }
     } else {
-      for( var key in collection ){
+      for( let key in collection ){
         if( !test(collection[key]) ){
           result.push(collection[key]);
         }
@@ -88,40 +88,27 @@ _.reject = function(collection, test) {
 
 
 _.uniq = function(array) {
-	var result = [];
-	var cnt;
+    let result = {};
 
-	for( var i = 0; i < array.length; i++ ){
-	  cnt = 0;
-	  for( var k = 0; k < result.length; k++){
-	    if( array[i] === result[k]){
-	      cnt = 1;
-	      break;
-	    }
-	  }
-
-	  if( cnt === 1){
-	    continue;
-	  } else {
-	    result.push(array[i]);
-	  }
+    for(let i = 0; i < array.length; i++){
+	if(!(array[i] in result)){
+	    result[array[i]] = array[i];
 	}
-
-	return result;
-   
+    }
+    return Object.values(result);
 };
 
 
 
 _.map = function(collection, iterator) {
-    var result = [];
+    let result = [];
 
     if( Array.isArray(collection) ){
-      for( var i = 0; i < collection.length; i++ ){
+      for( let i = 0; i < collection.length; i++ ){
         result.push( iterator(collection[i]) );
       }
     } else {
-      for ( var key in collection ){
+      for ( let key in collection ){
         result.push( iterator(collection[key]) );
       }
     }
@@ -133,9 +120,9 @@ _.map = function(collection, iterator) {
 
 
 _.pluck = function(collection, key) {
-    var result = [];
+    let result = [];
 
-    for( var i = 0; i < collection.length; i++ ){
+    for( let i = 0; i < collection.length; i++ ){
       result.push(collection[i][key]);
     }
 
@@ -149,11 +136,11 @@ _.reduce = function(collection, iterator, accumulator) {
 
 	if( accumulator === undefined ){
 	  accumulator = collection[0];
-	  for( var i = 1; i < collection.length; i++){
+	  for( let i = 1; i < collection.length; i++){
 	    accumulator = iterator(accumulator,collection[i],i);
 	  }
 	} else {
-	  for( var i = 0; i < collection.length; i++){
+	  for( let i = 0; i < collection.length; i++){
 	    accumulator = iterator(accumulator, collection[i], i);
 	  }
 	}
@@ -167,13 +154,13 @@ _.reduce = function(collection, iterator, accumulator) {
 _.contains = function(collection, target) {
 
     if( Array.isArray(collection) ){
-      for( var i = 0; i < collection.length; i++ ){
+      for( let i = 0; i < collection.length; i++ ){
         if( collection[i] === target ){
           return true;
         }
       }
     } else {
-      for( var key in collection ){
+      for( let key in collection ){
         if( collection[key] === target ){
           return true;
         }
@@ -188,7 +175,7 @@ _.contains = function(collection, target) {
 _.every = function(collection, iterator) {
 
     if( Array.isArray(collection) ){
-      for( var i = 0; i < collection.length; i++ ){
+      for( let i = 0; i < collection.length; i++ ){
         if( iterator === undefined ){
           if( !collection[i] ){
             return false;
@@ -200,7 +187,7 @@ _.every = function(collection, iterator) {
         }
       }
     } else {
-      for( var key in collection ){
+      for( let key in collection ){
         if( iterator === undefined ){
           if( !collection[key] ){
             return false;
@@ -221,7 +208,7 @@ _.every = function(collection, iterator) {
 
 _.some = function(collection, iterator) {
     if( Array.isArray(collection) ){
-      for( var i = 0; i < collection.length; i++ ){
+      for( let i = 0; i < collection.length; i++ ){
         if( iterator === undefined ){
           if( collection[i] ){
             return true;
@@ -233,7 +220,7 @@ _.some = function(collection, iterator) {
         }
       }
     } else {
-      for( var key in collection ){
+      for( let key in collection ){
         if( iterator === undefined ){
           if( collection[key] ){
             return true;
@@ -254,11 +241,11 @@ _.some = function(collection, iterator) {
 
 _.extend = function(obj) {
 
-    var argArr = Object.values(arguments);
+    let argArr = Object.values(arguments);
 
-    for( var i = 1; i < argArr.length; i++){
+    for( let i = 1; i < argArr.length; i++){
 
-      for( var key in argArr[i] ){
+      for( let key in argArr[i] ){
         obj[key] = argArr[i][key];
       }
 
@@ -271,11 +258,11 @@ _.extend = function(obj) {
 
 
 _.defaults = function(obj) {
-    var argArr = Object.values(arguments);
+    let argArr = Object.values(arguments);
 
-    for( var i = 1; i < argArr.length ; i++ ){
+    for( let i = 1; i < argArr.length ; i++ ){
 
-      for( var key in argArr[i] ){
+      for( let key in argArr[i] ){
         if( obj[key] === undefined ){
           obj[key] = argArr[i][key];
         }
@@ -290,11 +277,11 @@ _.defaults = function(obj) {
 
 
 _.memoize = function(func) {
-    var cache = {};
+    let cache = {};
 
     return function(){
-      var arg = Object.values(arguments);
-      var key = JSON.stringify(arg);
+      let arg = Object.values(arguments);
+      let key = JSON.stringify(arg);
 
       if( ! (key in cache) ){
         cache[key] = func.apply(this, arg);
@@ -308,23 +295,21 @@ _.memoize = function(func) {
 
 _.delay = function(func, wait) {
 
-    var arg = Object.values(arguments).slice(2);
+    let arg = Object.values(arguments).slice(2);
 
-    setTimeout(function(){
-      func.apply(this, arg);
-    },wait);
+    setTimeout(()=>{func.apply(this, arg);}, wait);
 };
 
 
 
 _.shuffle = function(array) {
-    var arr = array.slice();
+    let arr = array.slice();
 
-    var idx1;
-    var idx2;
-    var temp;
+    let idx1;
+    let idx2;
+    let temp;
 
-    for( var i = 0; i < 100 ; i++ ){
+    for( let i = 0; i < 100 ; i++ ){
       idx1 = parseInt(Math.random()*arr.length);
       idx2 = parseInt(Math.random()*arr.length);
 
@@ -341,14 +326,14 @@ _.shuffle = function(array) {
 
 _.invoke = function(collection, functionOrKey, args) {
 
-    var result = [];
+    let result = [];
 
     if( typeof functionOrKey === 'string' ){
-      for( var i = 0; i < collection.length; i++ ){
+      for( let i = 0; i < collection.length; i++ ){
         result.push( collection[i][functionOrKey].apply(collection[i]) );
       }
     } else {
-      for( var i = 0; i < collection.length; i++ ){
+      for( let i = 0; i < collection.length; i++ ){
         result.push( functionOrKey.apply(collection[i]) );
       }
     }
