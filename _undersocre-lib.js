@@ -284,7 +284,7 @@ _.memoize = function(func) {
       let key = JSON.stringify(arg);
 
       if( ! (key in cache) ){
-        cache[key] = func.apply(this, arg);
+        cache[key] = func.apply(...arg);
       }
 
       return cache[key];
@@ -297,7 +297,7 @@ _.delay = function(func, wait) {
 
     let arg = Object.values(arguments).slice(2);
 
-    setTimeout(()=>{func.apply(this, arg);}, wait);
+    setTimeout(()=>{func.apply(...arg);}, wait);
 };
 
 
@@ -330,11 +330,11 @@ _.invoke = function(collection, functionOrKey, args) {
 
     if( typeof functionOrKey === 'string' ){
       for( let i = 0; i < collection.length; i++ ){
-        result.push( collection[i][functionOrKey].apply(collection[i]) );
+        result.push( collection[i][functionOrKey].apply(this,collection[i]) );
       }
     } else {
       for( let i = 0; i < collection.length; i++ ){
-        result.push( functionOrKey.apply(collection[i]) );
+        result.push( functionOrKey.apply(this,collection[i]) );
       }
     }
     
